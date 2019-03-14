@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AStar.cs" />
+    <Compile Include="DictionaryParser.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="WordMorph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

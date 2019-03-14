@@ -32,7 +32,8 @@ namespace WordMorpher
         /// <param name="goal"></param>
         public Node PerformAStar(Graph g)
         {
-            if (!g.CheckLoc(goal) || !g.CheckLoc(start)) return null;
+            if (!g.CheckLoc(goal)) return null;
+            else Console.WriteLine("Beginning A*...");
             //Initialise the two sets needed.
             List<Node> closedSet = new List<Node>();
             List<Node> openSet = new List<Node>();
