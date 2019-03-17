@@ -12,7 +12,6 @@ namespace WordMorpher
     /// </summary>
     class AStar
     {
-        readonly string resultFile; //file location of the output file
 
         List<int> start;
         List<int> goal;
@@ -32,7 +31,9 @@ namespace WordMorpher
         /// <param name="goal"></param>
         public Node PerformAStar(Graph g)
         {
-            if (!g.CheckLoc(goal)) return null;
+            Node end = new Node(goal, 0, null);
+            //if end word does not exist or has no neighbours return immediately to save time.
+            if (!g.CheckLoc(goal) || GenerateNeighbours(g, end).Count == 0) return null;
             else Console.WriteLine("Beginning A*...");
             //Initialise the two sets needed.
             List<Node> closedSet = new List<Node>();
@@ -143,19 +144,12 @@ namespace WordMorpher
         /// <summary>
         /// Save the output to the file requested.
         /// </summary>
-        private void SaveOutput()
+        /// <param name="file"></param>
+        /// <param name="path"></param>
+        public void SaveOutput(string file, List<string> path)
         {
-            try
-            {
-                var fileStream = new FileStream(resultFile, FileMode.Open);
-                fileStream.Close();
-            }
-            catch (FileNotFoundException e)
-            {
-                Console.WriteLine("Creating the file at: " + resultFile);
-                File.Create(resultFile);
-            }
-
+            File.WriteAllLines(file, path.ToArray());
+            Console.WriteLine("Successfully saved to: " + file);
         }
         
     }

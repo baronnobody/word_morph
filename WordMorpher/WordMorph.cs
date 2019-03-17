@@ -48,10 +48,7 @@ namespace WordMorpher
             else
             {
                 List<string> path = goal.GetPath(g);
-                foreach (string p in path)
-                {
-                    Console.WriteLine(p);
-                }
+                aStar.SaveOutput(args[3], path);
             }
 
             return 1;

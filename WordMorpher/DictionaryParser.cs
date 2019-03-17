@@ -28,7 +28,6 @@ namespace WordMorpher
         /// <returns></returns>
         private void CreateTasks(int workers, Graph g, string fileLocation, int jobs)
         {
-            Console.WriteLine(jobs);
             Task[] tasks = new Task[workers];
             if (workers <= 1) //return one worker if one or less are requested
             {
@@ -44,6 +43,7 @@ namespace WordMorpher
             }
 
             Task.WaitAll(tasks);
+            Console.WriteLine("Finished parsing dictionary file.");
         }
 
         /// <summary>
@@ -55,13 +55,12 @@ namespace WordMorpher
         /// <param name="linesToRead"></param>
         public void ParseFile(Graph g, string file, int startLine, int linesToRead)
         {
-            Console.WriteLine("Started at line: " + startLine);
+            Console.WriteLine("Started to parse dictionary file at line: " + startLine);
             for (int i = 0; i < linesToRead; i++)
             {
                 string line = File.ReadLines(file).Skip(startLine + i).First();
                 g.InsertWord(line);
             }
-            Console.WriteLine("Finished");
         }
     }
 }
